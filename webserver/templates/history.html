@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title  %}History{% endblock %}
+
+{% block main %}
+  {% for item in history %}
+    <div class="rounded mx-5 px-4" style="--bs-bg-opacity: .07;">
+      <div class="card mx-auto mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="{{url_for('static', filename='coffeeimgs/' + item.coffee.photo)}}" class="img-fluid rounded-start">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body font-monospace">
+              <h4 class="card-title mb-3">{{item.coffee.name}}</h4>
+
+              <h5 class="mt-auto mb-3">Price: {{item.coffee.price}}$</h5>
+              <h6 class="mt-auto mb-3">Date: {{item.date}}</h6>
+              <a href="/buy/{{item.coffee.id}}" class="btn btn-primary float-end me-4 mb-2" style="position: absolute; bottom: 0px; right: 0px">Buy again</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+{% endblock %}

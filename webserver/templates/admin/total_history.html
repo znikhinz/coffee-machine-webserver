@@ -1,0 +1,74 @@
+{% extends 'admin/admin_index.html' %}
+
+{% block title  %}Total history{% endblock %}
+
+
+{% from "_formhelper.html" import render_field %}
+
+{% block admin_main %}
+  <form method="post" autocomplete="off">
+    <div class="row g-2">
+      <div class="col-md">
+        <div class="form-floating">
+          {{render_field(form.date_from)}}
+        </div>
+      </div>
+      <div class="col-md">
+        <div class="form-floating">
+          {{render_field(form.date_to)}}
+        </div>
+      </div>
+      <div class="col-md">
+        <div class="form-floating">
+          {{render_field(form.user_made)}}
+        </div>
+      </div>
+      <div class="col-md">
+        <div class="form-floating">
+          {{render_field(form.coffee)}}
+        </div>
+      </div>
+      <div class="col-md">
+        <div class="form-floating"  style="margin-top: 24px">
+          <label class="form-label" for="submit"></label>
+          <input type="submit" id="submit" value="Search" class="btn btn-primary">
+        </div>
+      </div>
+      <div class="col-md">
+        <div class="form-floating"  style="margin-top: 24px">
+          <label class="form-label" for="submit"></label>
+          <a href="/admin/report" class="btn btn-success">Get Report</a>
+        </div>
+      </div>
+    </div>
+  </form>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Product</th>
+        <th scope="col">Price</th>
+        <th scope="col">Name</th>
+        <th scope="col">Username</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Total:</th>
+        <td>{{ history | length }}</td>
+        <td>{{ history | sum(attribute='price') }}$</td>
+        <td></td>
+        <td></td>
+      </tr>
+      {% for item in history %}
+        <tr>
+          <th scope="row">{{item.date}}</th>
+          <td><a href="/admin/coffees/{{item.coffee.id}}">{{item.coffee.name}}</a></td>
+          <td>{{item.price}}$</td>
+          <td><a href="/admin/users/{{item.user_made.id}}">{{item.user_made.user.name + ' ' + item.user_made.user.surname}}</a></td>
+          <td>{{item.user_made.username}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

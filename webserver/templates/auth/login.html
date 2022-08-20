@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title  %}Login{% endblock %}
+
+{% block main %}
+{% from "_formhelper.html" import render_field %}
+
+{% if error %}
+<h4 class="text-danger mb-5 text-center">You must be authorized to perform such requests</h4>
+{% endif %}
+<div class="container" style="width: 350px">
+  <form method="post" autocomplete="off">
+      {{ render_field(form.username) }}
+      {{ render_field(form.password) }}
+      {{ render_field(form.remember_me) }}
+    <p>Don't have an account? <a href="/register">Register!</a></p>
+    <input class="btn btn-primary" type="submit" value="Log me in">
+  </form>
+</div>
+{% endblock %}

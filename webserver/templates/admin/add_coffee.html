@@ -1,0 +1,17 @@
+{% extends 'admin/admin_index.html' %}
+
+{% block title  %}Add Coffee{% endblock %}
+
+{% block admin_main %}
+{% from "_formhelper.html" import render_field %}
+
+<div class="container" style="width: 350px">
+  <form method="post" autocomplete="off" enctype='multipart/form-data'>
+      {{ render_field(form.name) }}
+      {{ render_field(form.description) }}
+      {{ render_field(form.price) }}
+      {{ render_field(form.photo) }}
+    <input class="btn btn-primary" type="submit" value="Add">
+  </form>
+</div>
+{% endblock %}

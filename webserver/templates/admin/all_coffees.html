@@ -1,0 +1,49 @@
+{% extends 'admin/admin_index.html' %}
+
+{% block title %}All coffees{% endblock %}
+
+{% block admin_main %}
+    <div class="bg-secondary rounded mx-5 px-4" style="--bs-bg-opacity: .07;">
+      <div class="row row-cols-auto">
+        <div class="col my-3 mx-auto" style="width: 300px; height: 300px">
+          <div class="card" aria-hidden="true">
+            <div class="card-body">
+              <h5 class="card-title placeholder-glow">
+                <span class="placeholder col-6"></span>
+              </h5>
+              <p class="card-text placeholder-glow">
+                <span class="placeholder col-7"></span>
+                <span class="placeholder col-4"></span>
+                <span class="placeholder col-4"></span>
+                <span class="placeholder col-6"></span>
+                <span class="placeholder col-8"></span>
+              </p>
+              <a href="/admin/coffees/add" class="btn btn-primary">Add new coffee</a>
+            </div>
+          </div>
+        </div>
+        {% for item in menu %}
+          <div class="col my-3 mx-auto">
+            <div class="card my-3 mx-auto menu-item shadow-sm">
+              <img src="../static/coffeeimgs/{{item.photo}}" class="card-img-top">
+              <div class="card-body font-monospace">
+                <div class="d-flex align-items-center">
+                  <span class="card-title fs-3 fw-semibold me-auto">{{item.name}}</span>
+                  <span class="card-title fs-5 ">{{item.price}}$</span>
+                </div>
+                <p class="card-text">{{item.description}}</p>
+                <div class="mb-3 mt-2 form-check">
+                  <label class="form-check-label" for="is_available">Available</label>
+                  <input class="form-check-input" id="is_available" name="is_available" type="checkbox" {{ 'checked' if item.is_available else '' }} disabled>
+                </div>
+                <div>
+                  <a href="/admin/coffees/{{item.id}}/edit" class="btn btn-primary">Edit</a>
+                  <a href="/admin/coffees/{{item.id}}/change_state" class="btn  float-end {{'btn-danger' if item.is_available else 'btn-success'}}">{{'Delete' if item.is_available else 'Make available'}}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+{% endblock %}

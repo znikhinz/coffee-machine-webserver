@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title  %}Buy{% endblock %}
+
+{% block main %}
+{% if error %}
+<h4 class="text-danger mb-5 text-center">error</h4>
+{% endif %}
+<div class="container border rounded shadow p-4" style="width: 500px;">
+  <div class="progress mb-4" style="height: 1px">
+    <div class="progress-bar" role="progressbar" style="width: 0%; height: 1px" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
+  <div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="{{url_for('static', filename='coffeeimgs/' + item.photo)}}" class="img-fluid rounded-start">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h4 class="card-title">{{item.name}}</h4>
+          <p class="card-text">Making time: 1 min</p>
+
+          <h5 class="mt-auto mb-0">Price: {{item.price}} $</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <form method="post">
+    <button type="submit" class="btn btn-primary mt-4 w-100">Pay</button>
+  </form>
+</div>
+{% endblock %}

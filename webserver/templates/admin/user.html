@@ -1,0 +1,24 @@
+{% extends 'admin/admin_index.html' %}
+
+{% block title  %}User{% endblock %}
+
+{% block admin_main %}
+{% from "_formhelper.html" import render_field %}
+
+<div class="container" style="width: 350px">
+  <form method="post" autocomplete="off" enctype='multipart/form-data'>
+      {{ render_field(form.date_created, False) }}
+      {{ render_field(form.username, edit) }}
+      {{ render_field(form.balance, edit) }}
+      {{ render_field(form.is_admin, edit) }}
+      {{ render_field(form.is_active, edit)}}
+      {{ render_field(form.name, edit)}}
+      {{ render_field(form.surname, edit)}}
+    {% if edit %}
+    <input class="btn btn-primary" type="submit" value="Save">
+    {% else %}
+    <a href="/admin/users/{{form.id.data}}/edit" class="btn btn-primary">Edit</a>
+    {% endif %}
+  </form>
+</div>
+{% endblock %}

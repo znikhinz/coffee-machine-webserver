@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title  %}About{% endblock %}
+
+{% block main %}
+  <h1>Coffee machine app</h1>
+  <h2>Created by Mykyta Yezhykhin</h2>
+  <hr />
+  <h2>Used technologies:</h2>
+  <ul>
+    <li>Python</li>
+    <li>Flask</li>
+    <li>Amazon AWS s3 for storing images</li>
+    <li><a href="http://www.cleardb.com">MysqlDB</a></li>
+    <li>Websockets</li>
+  </ul>
+  <h2>Description</h2>
+  <p>App was created for automating coffee machine in offices.
+  RFID scanner could be added to get customer's info from a card.</p>
+  <p>Administration options allow admins to add/delete coffees to menu,
+  manage existing users and make reports.</p>
+  <h2><a href="https://github.com/znikhinz/coffee-machine-webserver">Project</a> on github</h2>
+  <h2><a href="https://nikita-coffee-machine.herokuapp.com/">Project</a> on heroku cloud</h2>
+  <h2>Existing users in demo:</h2>
+  <ul>
+    <li>
+      <p><code>Admin</code>:</p>
+      <ul>
+        <li>Username: admin</li>
+        <li>Password: admin</li>
+      </ul>
+    </li>
+    <li>
+      <p><code>User</code>:</p>
+      <ul>
+        <li>Username: user</li>
+        <li>Password: user</li>
+      </ul>
+    </li>
+  </ul>
+{% endblock %}

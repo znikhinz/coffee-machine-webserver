@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title  %}Home{% endblock %}
+
+{% block main %}
+    <div class="bg-secondary rounded mx-5 px-4" style="--bs-bg-opacity: .07;">
+      <div class="row row-cols-auto">
+        {% for item in menu %}
+          <div class="col my-3 mx-auto">
+            <div class="card my-3 mx-auto menu-item shadow-sm">
+              <img src="../static/coffeeimgs/{{item.photo}}" class="card-img-top">
+              <div class="card-body font-monospace">
+                <div class="d-flex align-items-center">
+                  <span class="card-title fs-3 fw-semibold me-auto">{{item.name}}</span>
+                  <span class="card-title fs-5 ">{{item.price}}$</span>
+                </div>
+                <p class="card-text">{{item.description}}</p>
+                <a href="/buy/{{item.id}}" class="btn btn-primary float-end">Buy</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+{% endblock %}

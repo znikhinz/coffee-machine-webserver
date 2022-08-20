@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title  %}Status{% endblock %}
+
+{% block script %}
+<script type="module" charset="utf-8">
+  import { io } from "https://cdn.socket.io/4.3.2/socket.io.esm.min.js";
+  const socket = io.connect();
+  var status, status_code = 0;
+  socket.on('connect', () => {
+    console.log(socket.id)
+    get_state()
+  })
+  socket.on('message', (data) => {
+    if (!data.error_code){
+      status_code = data.status
+      switch (data.status){
+        case 0:
+          status = 'In queue';
+          break;
+        case 1:
+          status = 'Making your coffee';
+          break;
+        case 2:
+          status = 'Done! Take your coffee';
+          break;
+      }
+      document.getElementById("progressbar").style.width = (data.status + 1) * 33.33 + '%'
+      document.getElementById("status").textContent = status
+
+      if(status_code !== 2) get_state()
+      else {
+        setTimeout(function(){
+            window.location.href = '/';
+         }, 10000);
+      }
+    }
+    else{
+      window.location.replace("/");
+    }
+  })
+
+  function get_state() {
+    socket.send({'coffee_uuid': JSON.parse('{{ coffee.code | tojson }}')})
+  }
+
+</script>
+{% endblock %}
+
+{% block main %}
+<div class="container border rounded shadow p-4" style="width: 500px;">
+  <div class="progress mb-2" style="height: 1px">
+      <div class="progress-bar" id="progressbar" role="progressbar" style="width: 33%; height: 1px" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
+  <h4 id="status" class="mb-4 text-center">In queue</h4>
+  <div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="{{url_for('static', filename='coffeeimgs/' + item.photo)}}" class="img-fluid rounded-start">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h4 class="card-title">Latte</h4>
+          <p class="card-text">Average making time: 1 min</p>
+          <h5 class="card-title">Your coffeee code: {{coffee.code.split('-')[1]}}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'admin/admin_index.html' %}
+
+{% block title  %}Users{% endblock %}
+
+{% block admin_main %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Date Created</th>
+        <th scope="col">Username</th>
+        <th scope="col">Balance</th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+        <tr>
+          <th scope="row">{{user.date_created}}</th>
+          <td>{{user.username}}</td>
+          <td>{{user.balance}}$</td>
+          <td>{{user.user.name + ' ' + user.user.surname}}</td>
+          <td><a href="/admin/users/{{user.id}}/edit">edit</a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title  %}Admin Pannel{% endblock %}
+
+{% block main %}
+    <div style="max-width: 700px" class="mx-auto">
+      <header class="d-flex flex-wrap justify-content-start py-3 mb-4 border-bottom " >
+        <ul class="align-items-center nav nav-pills">
+          <li class="nav-item"><a href="/admin/total_history" class="nav-link {{'active' if '/admin/total_history'  == request.path.split('?')[0] else ''}}" aria-current="page">Total history</a></li>
+          <li class="nav-item"><a href="/admin/coffees" class="nav-link {{'active' if '/admin/coffees'  == request.path.split('?')[0] else ''}}">All coffees</a></li>
+          <li class="nav-item"><a href="/admin/users" class="nav-link {{'active' if '/admin/users'  == request.path.split('?')[0] else ''}}">Users</a></li>
+        </ul>
+      </header>
+    </div>
+    <div class="container">
+      {% block admin_main %}{% endblock %}
+    </div>
+{% endblock %}

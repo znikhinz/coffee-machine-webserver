@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title  %}Change the Pass{% endblock %}
+
+{% block main %}
+{% from "_formhelper.html" import render_field %}
+<div class="container" style="width: 350px">
+  <form method="post" autocomplete="off">
+      {{ render_field(form.name) }}
+      {{ render_field(form.surname) }}
+    <input class="btn btn-primary float-end me-3" type="submit" value="Save">
+  </form>
+</div>
+{% endblock %}

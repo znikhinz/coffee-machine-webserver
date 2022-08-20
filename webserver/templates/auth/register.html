@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title  %}Register{% endblock %}
+
+{% block main %}
+{% from "_formhelper.html" import render_field %}
+<div class="container" style="width: 350px">
+  <form method="post" autocomplete="off">
+      {{ render_field(form.username) }}
+      {{ render_field(form.password) }}
+      {{ render_field(form.confirm) }}
+      <div class="mt-5"></div>
+      {{ render_field(form.name) }}
+      {{ render_field(form.surname) }}
+    <input class="btn btn-primary float-end me-3" type="submit" value="Register">
+  </form>
+</div>
+{% endblock %}
